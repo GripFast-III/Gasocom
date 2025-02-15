@@ -20,7 +20,7 @@ const swaggerOptions = {
     info: {
       title: "User management API",
       version: "1.0.0",
-      description: "This API allows us to manage users (CRUD)",
+      description: "API for managing users in a system",
     },
   },
   apis: ["./index.js"], // Files with Swagger comments

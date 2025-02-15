@@ -1,4 +1,4 @@
-//Routes toward API
+//Routes towards API
 
 const express = require("express");
 const router = express.Router();
@@ -114,7 +114,7 @@ router.get("/:id", userController.getUserById); // Get a specific user
  *       404:
  *         description: "User not found"
  */
-router.put("/:id", userController.updateUser); // Update a user
+router.put("/:id", userController.updateUser); // Update user
 
 /**
  * @swagger
@@ -137,8 +137,8 @@ router.put("/:id", userController.updateUser); // Update a user
  */
 router.delete("/:id", userController.deleteUser); // Delete a user
 
-// Exemple de route
+// Route exemple
 router.get("/", (req, res) => {
-  res.send("Liste des utilisateurs");
+  res.send("List of users");
 });
 module.exports = router;

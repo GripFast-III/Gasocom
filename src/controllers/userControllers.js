@@ -1,12 +1,12 @@
-//Contient la logique metier (ajouter, modifier, supprimer un utilisateur)
+// Contient la logique metier (ajouter, modifier, supprimer un utilisateur)
 
 const { users } = require("../models/userModel");
 
-// ✅ 1. Créer un nouvel utilisateur
+// 1. Create a new user
 const createUser = (req, res) => {
   const { name, email } = req.body;
 
-  // Vérifications
+  // Verifications
   if (!name || !email) {
     return res.status(400).json({ message: "Name and mail required." });
   }
@@ -20,12 +20,12 @@ const createUser = (req, res) => {
   res.status(201).json(newUser);
 };
 
-// ✅ 2. Obtenir la liste des utilisateurs
+// ✅ 2. Get users' list
 const getUsers = (req, res) => {
   res.json(users);
 };
 
-// ✅ 3. Obtenir un utilisateur spécifique
+// ✅ 3. Get a specific user
 const getUserById = (req, res) => {
   const user = users.find((user) => user.id === parseInt(req.params.id));
   if (!user) {
@@ -34,7 +34,7 @@ const getUserById = (req, res) => {
   res.json(user);
 };
 
-// ✅ 4. Mettre à jour un utilisateur
+// ✅ 4. User update
 const updateUser = (req, res) => {
   const user = users.find((user) => user.id === parseInt(req.params.id));
   if (!user) {
@@ -52,16 +52,16 @@ const updateUser = (req, res) => {
   res.json(user);
 };
 
-// ✅ 5. Supprimer un utilisateur
+// ✅ 5. Delete user
 const deleteUser = (req, res) => {
   const index = users.findIndex((user) => user.id === parseInt(req.params.id));
   if (index === -1) {
-    return res.status(404).json({ message: "Utilisateur non trouvé." });
+    return res.status(404).json({ message: "User not found." });
   }
 
   users.splice(index, 1);
   res.status(204).send(); // 204 = No Content
 };
 
-// Export des fonctions pour les routes
+// Routes functions export
 module.exports = { createUser, getUsers, getUserById, updateUser, deleteUser };

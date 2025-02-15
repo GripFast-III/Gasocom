@@ -1,10 +1,10 @@
-//Initialise Express et Swagger
+// Express and Swagger initialisation
 const express = require("express");
 
 const app = express();
-app.use(express.json()); // Permet de lire du JSON dans les requêtes
+app.use(express.json()); // Allow to red json format in the requests
 
-// Importer les routes des utilisateurs
+// Import users' routes
 const userRoutes = require("./routes/userRoutes");
 app.use("/usuarios", userRoutes);
 
