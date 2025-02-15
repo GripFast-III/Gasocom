@@ -1,19 +1,15 @@
-//Point d'entrée de l'application
-
-const app = require("./src/app");
-
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => {
-  console.log(`🚀 Serveur lancé sur http://localhost:${PORT}`);
-});
-
+// Application entry point
 const express = require("express");
-const app = express();
 const swaggerJSDoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
+const userRoutes = require("./src/routes/userRoutes");
 
-// Swagger definition
+const app = express();
+app.use(express.json()); // Enable JSON body parsing
+
+//const app = require("./src/app");
+
+// Swagger configuration
 const swaggerOptions = {
   definition: {
     openapi: "3.0.0",
@@ -23,14 +19,20 @@ const swaggerOptions = {
       description: "API for managing users in a system",
     },
   },
-  apis: ["./index.js"], // Files with Swagger comments
+  apis: ["./src/routes/userRoutes.js"], // Files with Swagger comments
 };
 
 const swaggerDocs = swaggerJSDoc(swaggerOptions);
-
-// Uses swagger-ui-express to serve the API's documentation
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
-app.listen(3000, () => {
+// API Routes
+app.use("/usuarios", userRoutes);
+/*app.listen(3000, () => {
   console.log("Server is running on http://localhost:3000");
+});
+*/
+
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => {
+  console.log(`🚀 Serveur lancé sur http://localhost:${PORT}`);
 });
