@@ -18,6 +18,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true, // Ensures the email is unique
+    index: true,
   },
 });
 

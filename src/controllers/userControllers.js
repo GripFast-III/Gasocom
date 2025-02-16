@@ -6,6 +6,11 @@ const User = require("../models/userModel"); // Import the MongoDB model
 const createUser = async (req, res) => {
   const { name, email } = req.body;
 
+  // Check format
+  if (!/\S+@\S+\.\S+/.test(email)) {
+    return res.status(400).json({ message: "Invalid email format." });
+  }
+
   // Validity check
   if (!name || !email) {
     return res.status(400).json({ message: "Name and email are required." });

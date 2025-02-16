@@ -90,47 +90,26 @@ router.get("/:id", userController.getUserById); // Get a specific user
  *         description: "ID of the user to update"
  *         schema:
  *           type: string
- *       - name: user
- *         in: body
- *         required: true
- *         description: "New user information"
- *         schema:
- *           type: object
- *           required:
- *             - name
- *             - email
- *           properties:
- *             name:
- *               type: string
- *             email:
- *               type: string
- *               format: email
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - name
+ *               - email
+ *             properties:
+ *               name:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *                 format: email
  *     responses:
  *       200:
  *         description: "User successfully updated"
  *       400:
  *         description: "Invalid data"
- *       404:
- *         description: "User not found"
- */
-router.put("/:id", userController.updateUser); // Update user
-
-/**
- * @swagger
- * /usuarios/{id}:
- *   delete:
- *     summary: "Delete a user"
- *     description: "Delete a user from the system by ID."
- *     parameters:
- *       - name: id
- *         in: path
- *         required: true
- *         description: "ID of the user to delete"
- *         schema:
- *           type: string
- *     responses:
- *       200:
- *         description: "User successfully deleted"
  *       404:
  *         description: "User not found"
  */
