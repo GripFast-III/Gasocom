@@ -3,12 +3,12 @@ const express = require("express");
 const swaggerJSDoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 const userRoutes = require("./src/routes/userRoutes");
-const connectDB = require("./src/config/db"); // Connexion to MongoDB
+//const connectDB = require("./src/config/db"); // Connexion to MongoDB
 
 const app = express();
 app.use(express.json()); // Enable JSON body parsing
 
-connectDB(); // Call the function to connect to the data base
+//connectDB(); // Call the function to connect to the data base
 
 // Swagger configuration
 const swaggerOptions = {
