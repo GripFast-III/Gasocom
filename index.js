@@ -3,11 +3,12 @@ const express = require("express");
 const swaggerJSDoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 const userRoutes = require("./src/routes/userRoutes");
+const connectDB = require("./src/config/db"); // Connexion to MongoDB
 
 const app = express();
 app.use(express.json()); // Enable JSON body parsing
 
-//const app = require("./src/app");
+connectDB(); // Call the function to connect to the data base
 
 // Swagger configuration
 const swaggerOptions = {
@@ -27,12 +28,13 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 // API Routes
 app.use("/usuarios", userRoutes);
-/*app.listen(3001, () => {
+/*app.listen(3000, () => {
   console.log("Server is running on http://localhost:3000");
 });
 */
 
-const PORT = process.env.PORT || 3001;
+// Server starter
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`🚀 Serveur lancé sur http://localhost:${PORT}`);
+  console.log(`🚀 Server is running on http://localhost:${PORT}`);
 });
