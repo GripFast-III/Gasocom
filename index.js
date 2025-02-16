@@ -27,7 +27,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 // API Routes
 app.use("/usuarios", userRoutes);
-/*app.listen(3000, () => {
+/*app.listen(3001, () => {
   console.log("Server is running on http://localhost:3000");
 });
 */
