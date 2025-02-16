@@ -90,15 +90,12 @@ router.get("/:id", userController.getUserById); // Get a specific user
  *         description: "ID of the user to update"
  *         schema:
  *           type: string
- *       - name: user
- *         in: body
+ *       - in: body
+ *         name: user
+ *         description: "User object to be updated"
  *         required: true
- *         description: "New user information"
  *         schema:
  *           type: object
- *           required:
- *             - name
- *             - email
  *           properties:
  *             name:
  *               type: string
@@ -117,7 +114,7 @@ router.get("/:id", userController.getUserById); // Get a specific user
  *     produces:
  *       - application/json
  */
-router.put("/:id", userController.updateUser); // Update a user
+router.put("/:id", userController.updateUser); // Update user
 
 /**
  * @swagger
