@@ -113,6 +113,27 @@ router.get("/:id", userController.getUserById); // Get a specific user
  *       404:
  *         description: "User not found"
  */
+router.put("/:id", userController.updateUser); // Update a user
+
+/**
+ * @swagger
+ * /usuarios/{id}:
+ *   delete:
+ *     summary: "Delete a user"
+ *     description: "Delete a user from the system by ID."
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: "ID of the user to delete"
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: "User successfully deleted"
+ *       404:
+ *         description: "User not found"
+ */
 router.delete("/:id", userController.deleteUser); // Delete a user
 
 // Route exemple
