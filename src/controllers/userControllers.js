@@ -1,49 +1,60 @@
-// Contient la logique metier (ajouter, modifier, supprimer un utilisateur)
+// Contient la logique métier (ajouter, modifier, supprimer un utilisateur)
 
-const { users } = require("../models/userModel");
+let users = []; // An array to stock users
+let idCounter = 1; // Generate unique IDs
 
 // 1. Create a new user
 const createUser = (req, res) => {
   const { name, email } = req.body;
 
-  // Verifications
   if (!name || !email) {
-    return res.status(400).json({ message: "Name and mail required." });
+    return res.status(400).json({ message: "Name and email are required." });
   }
 
-  if (users.some((user) => user.email === email)) {
-    return res.status(400).json({ message: "This mail is already used." });
+  // Check if the mail already exists
+  const existingUser = users.find((user) => user.email === email);
+  if (existingUser) {
+    return res.status(400).json({ message: "This email is already used." });
   }
 
-  const newUser = { id: users.length + 1, name, email };
+  // Create a new user and add it into th array
+  const newUser = { id: idCounter++, name, email };
   users.push(newUser);
   res.status(201).json(newUser);
 };
 
-// ✅ 2. Get users' list
+// 2. Get a list of all users
 const getUsers = (req, res) => {
-  res.json(users);
+  res.json(users); // Just return the array of users
 };
 
-// ✅ 3. Get a specific user
+// 3. Get a sepcific user with the help of his ID
 const getUserById = (req, res) => {
-  const user = users.find((user) => user.id === parseInt(req.params.id));
-  if (!user) {
-    return res.status(404).json({ message: "User not found" });
-  }
-  res.json(user);
-};
+  const { id } = req.params;
+  const user = users.find((user) => user.id === parseInt(id));
 
-// ✅ 4. User update
-const updateUser = (req, res) => {
-  const user = users.find((user) => user.id === parseInt(req.params.id));
   if (!user) {
     return res.status(404).json({ message: "User not found." });
   }
 
+  res.json(user);
+};
+
+// 4. Update user information
+const updateUser = (req, res) => {
+  const { id } = req.params;
   const { name, email } = req.body;
-  if (email && users.some((u) => u.email === email && u.id !== user.id)) {
-    return res.status(400).json({ message: "This mail is already used." });
+
+  const user = users.find((user) => user.id === parseInt(id));
+  if (!user) {
+    return res.status(404).json({ message: "User not found." });
+  }
+
+  if (email && email !== user.email) {
+    const emailExist = users.find((u) => u.email === email);
+    if (emailExist) {
+      return res.status(400).json({ message: "This email is already used." });
+    }
   }
 
   user.name = name || user.name;
@@ -52,16 +63,18 @@ const updateUser = (req, res) => {
   res.json(user);
 };
 
-// ✅ 5. Delete user
+// 5. Delete user
 const deleteUser = (req, res) => {
-  const index = users.findIndex((user) => user.id === parseInt(req.params.id));
+  const { id } = req.params;
+
+  const index = users.findIndex((user) => user.id === parseInt(id));
   if (index === -1) {
     return res.status(404).json({ message: "User not found." });
   }
 
-  users.splice(index, 1);
+  users.splice(index, 1); // Remove the user from the array
   res.status(204).send(); // 204 = No Content
 };
 
-// Routes functions export
+// Exports the Routes' functions
 module.exports = { createUser, getUsers, getUserById, updateUser, deleteUser };

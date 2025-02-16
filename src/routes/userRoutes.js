@@ -1,5 +1,4 @@
-//Routes towards API
-
+// Routes towards API
 const express = require("express");
 const router = express.Router();
 const userController = require("../controllers/userControllers");
@@ -91,15 +90,12 @@ router.get("/:id", userController.getUserById); // Get a specific user
  *         description: "ID of the user to update"
  *         schema:
  *           type: string
- *       - name: user
- *         in: body
+ *       - in: body
+ *         name: user
+ *         description: "User object to be updated"
  *         required: true
- *         description: "New user information"
  *         schema:
  *           type: object
- *           required:
- *             - name
- *             - email
  *           properties:
  *             name:
  *               type: string
@@ -113,6 +109,10 @@ router.get("/:id", userController.getUserById); // Get a specific user
  *         description: "Invalid data"
  *       404:
  *         description: "User not found"
+ *     consumes:
+ *       - application/json
+ *     produces:
+ *       - application/json
  */
 router.put("/:id", userController.updateUser); // Update user
 
@@ -137,8 +137,4 @@ router.put("/:id", userController.updateUser); // Update user
  */
 router.delete("/:id", userController.deleteUser); // Delete a user
 
-// Route exemple
-router.get("/", (req, res) => {
-  res.send("List of users");
-});
 module.exports = router;
