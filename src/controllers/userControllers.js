@@ -21,7 +21,7 @@ const createUser = async (req, res) => {
     await newUser.save();
     res.status(201).json(newUser);
   } catch (error) {
-    res.status(500).json({ message: "Server error." });
+    res.status(500).json({ message: "Server error1." });
   }
 };
 
@@ -31,7 +31,7 @@ const getUsers = async (req, res) => {
     const users = await User.find();
     res.json(users);
   } catch (error) {
-    res.status(500).json({ message: "Server error." });
+    res.status(500).json({ message: "Server error2." });
   }
 };
 
@@ -46,7 +46,7 @@ const getUserById = async (req, res) => {
     }
     res.json(user);
   } catch (error) {
-    res.status(500).json({ message: "Server error." });
+    res.status(500).json({ message: "Server error3." });
   }
 };
 
@@ -73,7 +73,7 @@ const updateUser = async (req, res) => {
     await user.save();
     res.json(user);
   } catch (error) {
-    res.status(500).json({ message: "Server error." });
+    res.status(500).json({ message: "Server error4." });
   }
 };
 
@@ -90,7 +90,7 @@ const deleteUser = async (req, res) => {
     await user.remove();
     res.status(204).send(); // 204 = No Content
   } catch (error) {
-    res.status(500).json({ message: "Server error." });
+    res.status(500).json({ message: "Server error5." });
   }
 };
 
