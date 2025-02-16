@@ -90,21 +90,21 @@ router.get("/:id", userController.getUserById); // Get a specific user
  *         description: "ID of the user to update"
  *         schema:
  *           type: string
- *       requestBody:
+ *       - name: user
+ *         in: body
  *         required: true
- *         content:
- *          application/json:
- *            schema:
- *              type: object
- *              required:
- *                - name
- *                - email
- *              properties:
- *                name:
- *                  type: string
- *                email:
- *                  type: string
- *                  format: email
+ *         description: "New user information"
+ *         schema:
+ *           type: object
+ *           required:
+ *             - name
+ *             - email
+ *           properties:
+ *             name:
+ *               type: string
+ *             email:
+ *               type: string
+ *               format: email
  *     responses:
  *       200:
  *         description: "User successfully updated"
